@@ -1,42 +1,43 @@
-#
+# --------------------------------------------------------------------------------------------------
 # settings.rb.example
-#
-# copy this file to "settings.rb" and modify
-# the settings
-#
+# copy this file to "settings.rb" and modify the settings
+# --------------------------------------------------------------------------------------------------
 
-#
+
+# --------------------------------------------------------------------------------------------------
+# Default language for Redmine
+REDMINE_DEFAULT_LANG='en'
+
+# --------------------------------------------------------------------------------------------------
+# Emabled modules for migrated data
+# 'issue_tracking','time_tracking','news','documents','files','wiki','repository','boards'
+REDMINE_ENABLED_MODULES=['issue_tracking','time_tracking']
+
+# --------------------------------------------------------------------------------------------------
 # connection data for your bugzilla database
-#
-
-BUGZILLA_HOST='localhost'
+BUGZILLA_HOST='127.0.0.1'
 BUGZILLA_DB='bugs'
-BUGZILLA_USER=''
-BUGZILLA_PASSWORD=''
+BUGZILLA_USER='root'
+BUGZILLA_PASSWORD='bitnami'
+BUGZILLA_ENCODING='utf8'
 
-#
+# --------------------------------------------------------------------------------------------------
 # connection data for your redmine database
-#
+REDMINE_HOST='127.0.0.1'
+REDMINE_DB='bitnami_redmine'
+REDMINE_USER='root'
+REDMINE_PASSWORD='bitnami'
+REDMINE_ENCODING='utf8'
 
-REDMINE_HOST='localhost'
-REDMINE_DB='redmine'
-REDMINE_USER=''
-REDMINE_PASSWORD=''
-
-#
-# i found no way to map bugzilla user passwords
-# to redmine user passwords.
-#
+# --------------------------------------------------------------------------------------------------
+# i found no way to map bugzilla user passwords to redmine user passwords.
 # all migrated users will have this password.
 #
-# technically bugzilla and redmine use different
-# hash algorithms to encode the password. since
-# the passwords are hashed there is no way to decode
-# them.
-#
+# technically bugzilla and redmine use different hash algorithms to encode the password. 
+# since the passwords are hashed there is no way to decode them.
+REDMINE_DEFAULT_USER_PASSWORD = 'bitnami'
 
-REDMINE_DEFAULT_USER_PASSWORD = 'redmine'
-
+# --------------------------------------------------------------------------------------------------
 # Convert LDAP based Bugzilla accounts to use an LDAP Auth Source in Redmine
 # Set REDMINE_DEFAULT_AUTH_SOURCE_ID to nil to disable LDAP lookups
 # Set REDMINE_DEFUALT_AUTH_SOURCE_ID to the id of the LDAP auth source you configure in Redmine
@@ -53,24 +54,15 @@ REDMINE_LDAP = {
   'login_attr' => 'sAMAccountName'
 }
 
+# --------------------------------------------------------------------------------------------------
+# this is the path where the attachments are written to.
+# replace this with your redmine attachment path. This path is the $redmine_home/files directory.
+ATTACHMENT_PATH="/opt/bitnami/apps/redmine/htdocs/files"
 
-#
-# this is the path where the attachments 
-# are written to.
-# replace this with your redmine attachment path.
-# this path is the $redmine_home/files directory.
-#
-
-ATTACHMENT_PATH="/tmp"
-
-#
-# Bugzilla priority to Redmine priority map
-# this mapping is language dependent
-# if you have been altering your bugzilla settings
-# please check the contents of the "priority"-Table 
+# --------------------------------------------------------------------------------------------------
+# Bugzilla priority to Redmine priority map. This mapping is language dependent
+# if you have been altering your bugzilla settings please check the contents of the "priority" Table 
 # in your bugzilla database
-#
-
 ISSUE_PRIORITIES = {       
   "P1" => 7,
   "P2" => 6,
@@ -78,40 +70,29 @@ ISSUE_PRIORITIES = {
   "P4" => 3,
   "P5" => 3 }
 
-#
-# Bugzilla severity to Redmine tracker map
-# this mapping is language dependent
-# if you have been altering your bugzilla settings
-# please check the contents of the "bug_severity"-Table 
-# in your bugzilla database
-#
-
+# --------------------------------------------------------------------------------------------------
+# Bugzilla severity to Redmine tracker map. This mapping is language dependent
+# if you have been altering your bugzilla settings please check the contents of the "bug_severity" 
+# Table in your bugzilla database
 ISSUE_TRACKERS = {
-  "critical" => 1,
-  "trivial" => 1,
-  "minimal" => 1,
-  "major" => 1,
-  "normal" => 1,
-  "blocker" => 1,
-  "enhancement" => 1
+  "blocker" 	=> 1,
+  "critical" 	=> 1,
+  "major" 		=> 2,  
+  "normal" 		=> 2,  
+  "minor" 		=> 3,
+  "trivial" 	=> 4,
+  "enhancement" => 5
 }
 
+# --------------------------------------------------------------------------------------------------
+# Bugzilla status to Redmine status map. This mapping is language dependent.
+# if you have been altering your bugzilla settings please check the contents of the "bug_status" 
+# Table  in your bugzilla database.
 #
-# Bugzilla status to Redmine status map
-#
-# this mapping is language dependent
-# if you have been altering your bugzilla settings
-# please check the contents of the "bug_status"-Table 
-# in your bugzilla database
-#
-# please note that redmine does not have a "REOPENED" state
-# by default. the default settings below map reopened bugs
-# to the "new" state. If you would like to have a REOPENED state.
-# just add a new state on the redmine administration pages and
-# change the "REOPENED" entry accordingly
-# (normally to "REOPENED"      => 7)
-#
-
+# Please note that redmine does not have a "REOPENED" state by default. The default settings below 
+# map reopened bugs to the "new" state. If you would like to have a REOPENED state.
+# just add a new state on the redmine administration pages and change the "REOPENED" entry 
+# accordingly (normally to "REOPENED"      => 7)
 ISSUE_STATUS = {
   "UNCONFIRMED"   => 1,
   "NEW"           => 1,
@@ -122,16 +103,12 @@ ISSUE_STATUS = {
   "CLOSED"        => 5
 }
 
-#
-# Default Role ID for Project Members
-#
+# --------------------------------------------------------------------------------------------------
+# Default Role ID for Project Members.
 # In a default Redmine installation the following options are available:
-#
 # 1: Non member
 # 2: Anonymous
 # 3: Manager
 # 4: Developer
 # 5: Reporter
-
-DEFAULT_ROLE_ID = '3'
-
+DEFAULT_ROLE_ID = '4'
